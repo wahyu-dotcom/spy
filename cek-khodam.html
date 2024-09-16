@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Khodam</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e6004d;
+            transform: translateY(-5px);
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 1.8em;
+            color: #00ff7f;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #result.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #result.animated {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            input[type="text"], button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cek Khodam</h1>
+    <p>Masukinn nama lu wir!</p>
+
+    <input type="text" id="nameInput" placeholder="Masukkan nama kamu">
+    <button onclick="cekKhodam()">Cek Khodam</button>
+
+    <div id="result"></div>
+
+    <script>
+        const khodamNames = ['Windah Batu Bara', 'Joni Si Pemburu', 'Dino Gagah', 'Surti Angin Ribut', 'Ratu Ganteng', 'babi liar', 'biawak jamsut', 'harimau kikir', 'babi jamet', 'kodam langkah burung bar bar', 'monyet ajaib','udang balon'];
+
+        function cekKhodam() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                alert("Masukkan nama kamu!");
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * khodamNames.length);
+            const khodamName = khodamNames[randomIndex];
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = `Khodam kamu adalah: ${khodamName}`;
+            resultDiv.classList.add('visible');
+            
+            // Tambahkan animasi pulse setelah hasil muncul
+            setTimeout(() => {
+                resultDiv.classList.add('animated');
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>

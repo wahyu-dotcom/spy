@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seberapa Sigma Kamu?</title>
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .question-container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 600px;
+            animation: fadeIn 1s ease;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #00ff7f;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-text {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .answer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .answer {
+            background-color: #00e676;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .answer:hover {
+            background-color: #00ff7f;
+            transform: translateY(-5px);
+        }
+
+        .result {
+            font-size: 2em;
+            color: #00ff7f;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .question-container {
+                padding: 15px;
+            }
+
+            .answer {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Seberapa Sigma Kamu?</h1>
+    
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="question-container" id="questionContainer">
+        <div class="question-text" id="questionText">Pertanyaan akan muncul di sini</div>
+        <div class="answer-grid" id="answerGrid"></div>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "Apa yang biasanya kamu lakukan di akhir pekan?",
+                answers: ["Berolahraga", "Nonton film sendirian", "Jalan dengan mas amba", "Baca buku"],
+                scores: [3, 2, 1, 4]
+            },
+            {
+                question: "Bagaimana cara kamu mengatasi masalah?",
+                answers: ["Sendirian", "Minta bantuan teman", "Diskusi dengan keluarga", "Tidak memikirkannya"],
+                scores: [3, 2, 1, 4]
+            },
+            {
+                question: "Seberapa penting opini orang lain bagi kamu?",
+                answers: ["Tidak penting", "Kadang-kadang", "Sangat penting", "Saya peduli pada opini saya sendiri"],
+                scores: [4, 2, 1, 3]
+            },
+            {
+                question: "Bagaimana kamu bersosialisasi?",
+                answers: ["Introvert total", "Kadang suka keluar", "Sangat sosial", "Sesuai suasana hati"],
+                scores: [3, 2, 1, 4]
+            },
+            {
+                question: "Kamu lebih suka bekerja dalam tim atau sendirian?",
+                answers: ["Sendirian", "Dalam tim", "Bergantung situasi", "Tidak suka keduanya"],
+                scores: [4, 1, 2, 3]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let totalScore = 0;
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionText').innerText = question.question;
+
+            const answerGrid = document.getElementById('answerGrid');
+            answerGrid.innerHTML = '';
+            question.answers.forEach((answer, index) => {
+                const answerButton = document.createElement('div');
+                answerButton.classList.add('answer');
+                answerButton.innerText = answer;
+                answerButton.onclick = () => selectAnswer(index);
+                answerGrid.appendChild(answerButton);
+            });
+
+            const progressBar = document.getElementById('progressBar');
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function selectAnswer(answerIndex) {
+            const question = questions[currentQuestion];
+            totalScore += question.scores[answerIndex];
+
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('questionContainer').style.display = 'none';
+            const resultDiv = document.getElementById('result');
+            let resultText = '';
+
+            if (totalScore <= 8) {
+                resultText = 'Kamu cukup Sigma!';
+            } else if (totalScore <= 12) {
+                resultText = 'Kamu termasuk Sigma!';
+            } else {
+                resultText = 'Kamu adalah Sigma Sejati!';
+            }
+
+            resultDiv.innerText = resultText;
+            resultDiv.style.display = 'block';
+        }
+
+
+    function goHome() {
+        window.location.href = 'pilihan game.html';  // Link kembali ke halaman utama
+    }
+
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>

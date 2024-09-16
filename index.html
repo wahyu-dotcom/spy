@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Center - Pilih Game Favoritmu</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #3d003f 0%, #001679 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: slideIn 1s ease;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1000px;
+            width: 90%;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .game-option {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-option img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            transition: transform 0.4s ease;
+        }
+
+        .game-option:hover img {
+            transform: scale(1.15);
+        }
+
+        .game-option h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .game-option p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .play-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #74ebd5;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.4s ease;
+            text-decoration: none;
+        }
+
+        .play-button:hover {
+            background-color: #57c8a9;
+        }
+
+        .music-control {
+            cursor: pointer;
+            width: 50px;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.2);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Smooth Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Game Center</h1>
+
+    <div class="game-container">
+        <div class="game-option" onclick="window.location.href='cek-khodam.html'">
+            <img src="https://media.giphy.com/media/HftqwYs67mNl7arU10/giphy.gif?cid=ecf05e47xza8qam11ii9jcuhp93943y0msxkmsnu1xzmrnwb&ep=v1_gifs_related&rid=giphy.gif&ct=g" alt="Cek Khodam GIF">
+            <h3>Cek Khodam</h3>
+            <p>ingin tahu khodam lu? liat ae disini!</p>
+            <a class="play-button">Mainkan</a>
+        </div>
+
+        <div class="game-option" onclick="window.location.href='seberapa-sigma.html'">
+            <img src="https://media.giphy.com/media/y3x9rGLWGRTTP9Wrqf/giphy.gif?cid=790b7611pbllalxzium669bwqqnifrri203kpgklhgj90zvc&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Seberapa Sigma Kamu GIF">
+            <h3>Seberapa Sigma Kamu?</h3>
+            <p>Uji dirimu dan lihat seberapa "Sigma" kamu!</p>
+            <a class="play-button">Mainkan</a>
+        </div>
+
+        <div class="game-option" onclick="window.location.href='elaina.html'">
+            <img src="https://media.giphy.com/media/4QxQgWZHbeYwM/giphy.gif?cid=790b76110zj24h8s8i84h0ary6qm00wqgt1uqcmwcif1ogyr&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Menyadarkan Admin Anime GIF">
+            <h3>Menyadarkan Admin</h3>
+            <p>Dapatkah kamu menyadarkan admin tentang kenyataan?</p>
+            <a class="play-button">Mainkan</a>
+        </div>
+    </div>
+
+    <!-- Musik -->
+    <audio id="background-music" loop>
+        <source src="file:///C:/xampp/htdocs/amboy.com/game/StockTune-Neon Nights Groove_1726452939.mp3" type="audio/mp3">
+        Browser kamu tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Tombol Musik Play/Pause -->
+    <img id="music-control" class="music-control" src="https://static.zerochan.net/Hatsune.Miku.full.4095399.jpg" alt="Music Control">
+
+    <footer>
+        © 2024 Game Center - Powered by wahyu jangan lupa follow ig wahyurmdhn999
+    </footer>
+
+    <script>
+        // Musik Latar
+        const music = document.getElementById("background-music");
+        const musicControl = document.getElementById("music-control");
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicControl.src = "speaker-off.png";
+            } else {
+                music.play();
+                musicControl.src = "speaker-on.png";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        musicControl.addEventListener("click", toggleMusic);
+    </script>
+
+</body>
+</html>

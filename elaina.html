@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menyadarkan Admin</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #141E30, #243B55);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .question-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .question-card img {
+            width: 300px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .question-card button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #00ff7f;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .question-card button:hover {
+            background-color: #00e676;
+        }
+
+        .back-home {
+            background-color: #f50057;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .back-home:hover {
+            background-color: #d4004c;
+        }
+
+        .answer-explanation {
+            font-size: 1.2em;
+            margin-top: 15px;
+            color: #00ff7f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Apakah Kamu Bisa Menyadarkan Admin?</h1>
+
+    <div id="gameContainer"></div>
+
+    <script>
+        const questions = [
+    {
+        question: "Admin yakin Elaina adalah pasangan hidupnya. Apa yang kamu katakan?",
+        answers: [
+            { text: "Mungkin coba pikirkan lagi...", explanation: "Admin perlu evaluasi lebih dalam tentang kenyataan." },
+            { text: "Semua orang punya mimpi, tapi...", explanation: "Kamu sedang mencoba menyadarkan admin perlahan." },
+            { text: "Itu hanya fiksi!", explanation: "Kamu benar, Elaina hanya ada di anime." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.3761415.jpg"
+    },
+    {
+        question: "Admin mengajak Elaina ke dunia nyata. Bagaimana tanggapanmu?",
+        answers: [
+            { text: "Bawa admin ke dokter", explanation: "Mungkin admin perlu pemeriksaan lebih lanjut." },
+            { text: "Beri tahu admin bahwa itu tidak mungkin", explanation: "Kenyataan terkadang sulit diterima." },
+            { text: "Tertawakan admin", explanation: "Mungkin ini bisa membuat admin tersadar, tapi sedikit kejam." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.4234162.jpg"
+    },
+    {
+        question: "Admin berusaha membuat Elaina cemburu. Apa pendapatmu?",
+        answers: [
+            { text: "Berikan nasihat yang baik", explanation: "Kamu mencoba mengembalikan admin ke dunia nyata." },
+            { text: "Biarkan saja", explanation: "Kamu memilih untuk tidak ikut campur, tapi admin mungkin butuh pertolongan." },
+            { text: "Katakan padanya Elaina tidak nyata", explanation: "Kenyataan terkadang pahit, tapi perlu dikatakan." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.4234161.jpg"
+    },
+    {
+        question: "Admin mengajak Elaina berlibur ke Bali. Apa reaksimu?",
+        answers: [
+            { text: "Dukung saja", explanation: "Kamu memilih untuk mendukung impiannya, walaupun tidak realistis." },
+            { text: "Coba sadarkan dia", explanation: "Kamu mencoba dengan sopan mengingatkan admin tentang kenyataan." },
+            { text: "Bilang saja tidak mungkin", explanation: "Lebih baik kamu tegas, meskipun sulit." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.4214198.png"
+    },
+    {
+        question: "Admin mulai berbelanja barang-barang Elaina. Apa yang kamu lakukan?",
+        answers: [
+            { text: "Sarankan untuk investasi yang lebih baik", explanation: "Kamu mencoba membantunya dalam mengatur keuangan." },
+            { text: "Ikut tertawa", explanation: "Mungkin ini bisa menjadi momen yang lucu, tapi kenyataannya tidak." },
+            { text: "Abaikan", explanation: "Kamu memutuskan untuk tidak ikut campur, meskipun khawatir." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.4205326.jpg"
+    },
+    {
+        question: "Admin ingin bertemu Elaina di event cosplay. Apa yang kamu katakan?",
+        answers: [
+            { text: "Dukung dia", explanation: "Kadang membiarkan seseorang merasakan kegagalan adalah cara terbaik untuk menyadarkannya." },
+            { text: "Beritahu dia bahwa itu hanya cosplay", explanation: "Kamu mencoba mengingatkan admin bahwa itu hanyalah kostum." },
+            { text: "Abaikan", explanation: "Kamu tidak ingin merusak harapannya, tapi dia perlu disadarkan." }
+        ],
+        sr: "https://static.zerochan.net/Elaina.full.4276874.jpg"
+    },
+    {
+        question: "Admin mulai berbicara dengan foto Elaina. Apa yang kamu lakukan?",
+        answers: [
+            { text: "Saran untuk konsultasi psikolog", explanation: "Mungkin sudah saatnya admin mendapatkan bantuan profesional." },
+            { text: "Coba ajak dia berbicara tentang kenyataan", explanation: "Kamu ingin mengarahkannya kembali ke dunia nyata." },
+            { text: "Biarkan saja", explanation: "Meskipun ini aneh, kamu memilih untuk tidak ikut campur." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.3195666.jpg"
+    },
+    {
+        question: "Admin menghabiskan semua waktu menonton Elaina. Bagaimana pendapatmu?",
+        answers: [
+            { text: "Sarankan hobi baru", explanation: "Kamu mencoba mengajaknya keluar dari dunia fiksi." },
+            { text: "Biarkan saja", explanation: "Mungkin admin butuh waktu untuk menyadari sendiri kenyataan." },
+            { text: "Bilang bahwa itu terlalu banyak", explanation: "Kadang kata-kata yang tegas dibutuhkan untuk menyadarkan seseorang." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.3935732.png"
+    },
+    {
+        question: "Admin yakin akan menikahi Elaina suatu hari nanti. Apa reaksimu?",
+        answers: [
+            { text: "Coba berbicara serius", explanation: "Ini adalah momen di mana kamu harus serius menyadarkannya." },
+            { text: "Tertawa saja", explanation: "Humor kadang bisa membuat seseorang menyadari kesalahan." },
+            { text: "Diam dan pergi", explanation: "Kamu merasa tidak bisa menangani situasi ini." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.4243200.jpg"
+    },
+    {
+        question: "Admin mulai membayangkan masa depan dengan Elaina. Apa tanggapanmu?",
+        answers: [
+            { text: "Ingatkan bahwa dia tidak nyata", explanation: "Kamu mencoba memberinya realitas pahit dengan cara lembut." },
+            { text: "Biarkan dia bermimpi", explanation: "Kadang bermimpi tidak salah, tapi harus ada batasnya." },
+            { text: "Coba bawa dia ke kenyataan", explanation: "Kamu ingin admin kembali ke kenyataan, walaupun sulit." }
+        ],
+        image: "https://static.zerochan.net/Elaina.full.3170049.png"
+    }
+];
+
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const container = document.getElementById('gameContainer');
+            container.innerHTML = '';
+
+            if (currentQuestion >= questions.length) {
+                container.innerHTML = "<h2>Game Selesai!</h2><p>Seru memang menyukai karakter fiksi, tapi ingatlah bahwa kita hidup di dunia nyata. Nikmati fantasi, tapi jangan lupa untuk selalu menjaga keseimbangan dan tetap sadar akan kenyataan. Hidup ini penuh keajaiban yang bisa kamu alami secara nyata!</p>";
+                container.innerHTML += "<button class='back-home' onclick='goHome()'>Kembali ke Halaman Utama</button>";
+                return;
+            }
+
+            const questionCard = document.createElement('div');
+            questionCard.className = 'question-card';
+
+            const questionTitle = document.createElement('h2');
+            questionTitle.textContent = questions[currentQuestion].question;
+            questionCard.appendChild(questionTitle);
+
+            const questionImage = document.createElement('img');
+            questionImage.src = questions[currentQuestion].image;
+            questionImage.alt = 'Elaina Image';
+            questionCard.appendChild(questionImage);
+
+            questions[currentQuestion].answers.forEach(answer => {
+                const answerButton = document.createElement('button');
+                answerButton.textContent = answer.text;
+                answerButton.onclick = () => showExplanation(answer.explanation);
+                questionCard.appendChild(answerButton);
+            });
+
+            container.appendChild(questionCard);
+        }
+
+        function showExplanation(explanation) {
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'answer-explanation';
+            explanationDiv.textContent = explanation;
+
+            const container = document.getElementById('gameContainer');
+            container.innerHTML = '';
+            container.appendChild(explanationDiv);
+
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 3000);
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';  // Link kembali ke halaman utama
+        }
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>
